@@ -1,0 +1,317 @@
+@import "tailwindcss";
+
+:root {
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  color: var(--color-ink);
+  background: var(--color-canvas);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  --color-ink: #242820;
+  --color-muted: #85877f;
+  --color-canvas: #f5f5f0;
+  --color-accent: #78906f;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+[role="tabpanel"]:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+.eyebrow {
+  color: var(--color-accent);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+}
+
+.workspace {
+  border: 1px solid rgb(36 40 32 / 5%);
+  background: rgb(255 255 255 / 78%);
+  box-shadow: 0 24px 70px rgb(36 40 32 / 6%);
+}
+
+.primary-button {
+  border: 1px solid var(--color-accent);
+  background: var(--color-accent);
+  color: white;
+  transition:
+    background-color 180ms ease,
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.primary-button:hover {
+  transform: translateY(-1px);
+  background: #687f60;
+  box-shadow: 0 8px 20px rgb(120 144 111 / 22%);
+}
+
+.primary-button svg {
+  width: 1.1rem;
+  height: 1.1rem;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-width: 1.8;
+}
+
+.tab-list {
+  scrollbar-width: thin;
+  scrollbar-color: #d7d9d1 transparent;
+}
+
+.tab-button {
+  position: relative;
+  color: var(--color-muted);
+  transition: color 180ms ease;
+}
+
+.tab-button::after {
+  position: absolute;
+  right: 0.75rem;
+  bottom: -1px;
+  left: 0.75rem;
+  height: 2px;
+  border-radius: 2px 2px 0 0;
+  background: var(--color-accent);
+  content: "";
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 220ms ease;
+}
+
+.tab-button:hover,
+.tab-button.is-active {
+  color: var(--color-ink);
+}
+
+.tab-button.is-active::after {
+  transform: scaleX(1);
+}
+
+.tab-delete {
+  display: grid;
+  width: 1.7rem;
+  height: 1.7rem;
+  margin-left: -0.5rem;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--color-muted);
+  opacity: 0;
+  transition:
+    opacity 160ms ease,
+    color 160ms ease,
+    background-color 160ms ease;
+}
+
+.tab-item:hover .tab-delete,
+.tab-delete:focus-visible {
+  opacity: 1;
+}
+
+.tab-delete:hover {
+  background: var(--color-canvas);
+  color: #a05245;
+}
+
+.tab-delete svg {
+  width: 0.95rem;
+  height: 0.95rem;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.5;
+}
+
+.content-enter {
+  animation: content-fade 420ms ease both;
+}
+
+.modal-backdrop {
+  position: fixed;
+  z-index: 20;
+  inset: 0;
+  display: grid;
+  overflow-y: auto;
+  padding: 1.25rem;
+  place-items: center;
+  background: rgb(36 40 32 / 30%);
+  backdrop-filter: blur(9px);
+  -webkit-backdrop-filter: blur(9px);
+  animation: backdrop-fade 180ms ease both;
+}
+
+.modal-card {
+  position: relative;
+  margin: auto;
+  animation: modal-enter 240ms cubic-bezier(0.2, 0.75, 0.25, 1) both;
+}
+
+.modal-close {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  display: grid;
+  width: 2.25rem;
+  height: 2.25rem;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: var(--color-canvas);
+  color: var(--color-muted);
+  transition:
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.modal-close:hover {
+  transform: rotate(90deg);
+  color: var(--color-ink);
+}
+
+.modal-close svg {
+  width: 1.1rem;
+  height: 1.1rem;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-width: 1.7;
+}
+
+.form-field {
+  display: grid;
+  gap: 0.5rem;
+  color: var(--color-ink);
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.form-field input,
+.form-field textarea {
+  width: 100%;
+  resize: vertical;
+  border: 1px solid rgb(36 40 32 / 12%);
+  border-radius: 0.9rem;
+  background: white;
+  padding: 0.8rem 0.9rem;
+  color: var(--color-ink);
+  font-size: 0.9rem;
+  font-weight: 400;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.form-field input::placeholder,
+.form-field textarea::placeholder {
+  color: #a7a9a2;
+}
+
+.form-field input:focus,
+.form-field textarea:focus {
+  border-color: var(--color-accent);
+  outline: 0;
+  box-shadow: 0 0 0 3px rgb(120 144 111 / 12%);
+}
+
+.secondary-button {
+  border: 1px solid rgb(36 40 32 / 12%);
+  background: white;
+  color: var(--color-ink);
+  transition: background-color 160ms ease;
+}
+
+.secondary-button:hover {
+  background: var(--color-canvas);
+}
+
+.danger-button {
+  border: 1px solid #a05245;
+  background: #a05245;
+  color: white;
+  transition: background-color 160ms ease;
+}
+
+.danger-button:hover {
+  background: #884638;
+}
+
+@keyframes content-fade {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes backdrop-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modal-enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 640px) {
+  .tab-delete {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
